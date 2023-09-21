@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from "react";
 import _ from "lodash";
 import "./Header.css";
-import Style from "../App.module.css";
-import { useNavigate } from "react-router-dom";
-import logoimage from "../MainPage/MainImgs/amuse_logo.png";
-import { isLoggedIn } from "../atoms";
-import { useRecoilState } from "recoil";
-import MyPageMenu from "../MyPages/MyPageMenu";
 import axios from "axios";
-import SearchIcon from "./search.png";
-import { useCookies } from "react-cookie";
 import moment from "moment";
+import SearchIcon from "./search.png";
+import logoimage from "../MainPage/MainImgs/amuse_logo.png";
+import Style from "../App.module.css";
+import { isLoggedIn } from "../atoms";
+import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { useInfoContext } from "../DetailPage/Contexts/InfoContext";
 import { useCategoryContext } from "./Contexts/CategoryContext";
 import { CategoryNameMenuProps } from "../Interfaces/PropsInterfaces";
-import { useInfoContext } from "../DetailPage/Contexts/InfoContext";
+
+import Login from "../Headers/Component/Login";
+
+// mobileHeader === 1 모바일
+// mobileHeader === 0 pc
 
 interface MoreDropdownProps {
   // handleClick: () => void;
@@ -25,8 +29,6 @@ function Header() {
   const { name, setName } = useInfoContext();
   const { setCategoriesInfo } = useCategoryContext();
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
-  // const [manager, setManager] = useRecoilState(isManager);
-  // const [token, setToken] = useState("");
   const [cookies, setCookie, removeCookie] = useCookies([
     "__jwtk__",
     "__igjwtk__",
@@ -34,30 +36,8 @@ function Header() {
     "__usrN__",
   ]);
 
-  // const checkIsManager = (token: String) => {
-  //   const searchParams = new URLSearchParams(location.search);
-  //   const email = searchParams.get("email");
-
-  //   axios
-  //     .get(`${process.env.REACT_APP_AMUSE_API}/api/v1/admin/search/users?email=${email}`, {
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: `Bearer ${token}`,
-  //       },
-  //     })
-  //     .then((response) => {
-  //       console.log(response.data);
-  //       if (response.data.code == 1000) {
-  //         setManager(true);
-  //       }
-  //     });
-  // };
-
   const navigateToHome = () => {
     movePage("/");
-  };
-  const navigateToAboutAmuse = () => {
-    movePage("/aboutAmuse");
   };
 
   const navigateToSubPageComp = (apiKey: number, cName: string) => {
@@ -71,14 +51,7 @@ function Header() {
   const navigateToSearch = () => {
     const encodedKeyword = encodeURIComponent(searchKeyword);
     movePage(`/search/${encodedKeyword}`);
-    setSearchKeyword("")
-  };
-
-  const navigateToLogIn = () => {
-    movePage("/LogIn");
-  };
-  const navigateToSignUP = () => {
-    movePage("/SignUP");
+    setSearchKeyword("");
   };
 
   const CategoryMenu: React.FC<CategoryNameMenuProps> = ({
@@ -95,7 +68,6 @@ function Header() {
 
   const [categories, setCategories] = useState([]);
   const [categoryIds, setCategoryIds] = useState([]);
-  // const [showDropdown, setShowDropdown] = useState(false);
 
   const MoreDropdown: React.FC<MoreDropdownProps> = () => (
     <div className="dropdown">
@@ -124,18 +96,10 @@ function Header() {
               {categoryName}
             </div>
           ))}
-          {/* <div className="dropdown-item">회사 소개</div> */}
         </>
       )}
     </div>
   );
-
-  // useEffect(() => {
-  //   const token = cookies["__jwtkid__"];
-  //   if (token) {
-  //     checkIsManager(token);
-  //   }
-  // }, []);
 
   useEffect(() => {
     axios
@@ -263,19 +227,7 @@ function Header() {
         console.log(err);
       });
   };
-  const handleLogout = () => {
-    let token = cookies.__jwtkid__;
-    setLoggedIn(false);
-    // setManager(false);
-    const expires = moment().add("1", "m").toDate();
-    setCookie("__igjwtk__", token, { expires });
-    removeCookie("__jwtkid__", { path: "/", maxAge: 0 });
-    removeCookie("__usrN__", { path: "/", maxAge: 0 });
-    navigateToHome();
-  };
-  // if(!name){
-  //   setName(cookies.__usrN__)
-  // }
+
   return (
     <div>
       <div className={Style["App"]}>
@@ -283,32 +235,14 @@ function Header() {
         <div className={`${mobileHeader === 1 ? "mobile-header" : ""}`}>
           {mobileHeader === 1 && (
             <div style={{ paddingTop: "5px", paddingBottom: "10px" }}>
-              <div className="btnBox_mobile">
-                {loggedIn ? <div>{name || cookies.__usrN__} 님 😊</div> : ""}
-                {loggedIn ? (
-                  <button className="loginBtn" onClick={handleLogout}>
-                    로그아웃
-                  </button>
-                ) : (
-                  <button className="loginBtn" onClick={navigateToLogIn}>
-                    로그인
-                  </button>
-                )}
-                {loggedIn ? (
-                  <MyPageMenu />
-                ) : (
-                  <button className="signInBtn" onClick={navigateToSignUP}>
-                    회원가입
-                  </button>
-                )}
-                {/* {loggedIn && manager ? (
-                  <a className="adminBtn" href={`http://myadmin.wheelgo.net/login`} target="_blank" rel="noreferrer">
-                    어드민
-                  </a>
-                ) : (
-                  <div></div>
-                )} */}
-              </div>
+              <Login
+                name={name}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                cookies={cookies}
+                setCookie={setCookie}
+                removeCookie={removeCookie}
+              />
               <div className="logo_container">
                 <img
                   className="logo_mobile"
@@ -366,51 +300,18 @@ function Header() {
               </div>
             </div>
           )}
+
           {/* pc 버전 */}
           {mobileHeader === 0 && (
             <div>
-              <div className="btnBox">
-                {loggedIn ? (
-                  <div className="userName">
-                    {name || cookies.__usrN__} 님 😊
-                  </div>
-                ) : (
-                  ""
-                )}
-                {loggedIn ? (
-                  <button className="loginBtn" onClick={handleLogout}>
-                    로그아웃
-                  </button>
-                ) : (
-                  <button className="loginBtn" onClick={navigateToLogIn}>
-                    로그인
-                  </button>
-                )}
-                {loggedIn ? (
-                  <div>
-                    <MyPageMenu />
-                    {/* <a
-                      className="adminBtn"
-                      href={`http://13.125.82.58/manager?token=${token}`}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      어드민
-                    </a> */}
-                  </div>
-                ) : (
-                  <button className="signInBtn" onClick={navigateToSignUP}>
-                    회원가입
-                  </button>
-                )}
-                {/* {loggedIn && manager ? (
-                  <a className="adminBtn" href={`http://myadmin.wheelgo.net/login`} target="_blank" rel="noreferrer">
-                    어드민
-                  </a>
-                ) : (
-                  <div></div>
-                )} */}
-              </div>
+              <Login
+                name={name}
+                loggedIn={loggedIn}
+                setLoggedIn={setLoggedIn}
+                cookies={cookies}
+                setCookie={setCookie}
+                removeCookie={removeCookie}
+              />
               <div className="top">
                 <img
                   className="logo"
@@ -464,9 +365,6 @@ function Header() {
                     </div>
                   </>
                 )}
-                {/* <div className="menu-item" onClick={navigateToAboutAmuse}>
-                  회사 소개
-                </div> */}
               </div>
             </div>
           )}

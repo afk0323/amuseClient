@@ -41,10 +41,6 @@ function Home() {
   const [categoryData, setCategoryData] = useState<CategoryData | null>(null);
   const [cookies] = useCookies(["__jwtkid__"]);
 
-  // const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
-  // const [manager, setManager] = useRecoilState(isManager);
-  // const location = useLocation();
-
   useEffect(() => {
     let infoIndex = _.findIndex(categoriesInfo, { categoryName: "home" });
     if (infoIndex < 0) {
@@ -52,7 +48,6 @@ function Home() {
     }
     if (categoriesInfo?.length) {
       const info = categoriesInfo[infoIndex];
-      // console.log(info);
       setApiKeyNumber(info.categoryId);
     }
   }, [categoriesInfo]);
@@ -82,11 +77,6 @@ function Home() {
 
   const [comTypes, setComTypes] = useState<[]>([]);
   const [Items, setItems] = useState<[]>([]);
-  // const [bannerContent, setBannerContent] = useState<string[]>([]);
-  // const [bannerPCUrl, setBannerPCUrl] = useState<string[]>([]);
-  // const [ItemTitle, setItemTitle] = useState<string[]>([]);
-  // const [ItemPrice, setItemPrice] = useState<number[]>([]);
-  // const [ItemImageUrl, setItemImageUrl] = useState<string[]>([]);
 
   useEffect(() => {
     if (apiKeyNumber > 0) {
@@ -112,7 +102,6 @@ function Home() {
         setItems(items);
         const types = items.map((item: any) => item.type);
         setComTypes(types);
-        // console.log("컴포넌트", response.data.data);
       })
       .catch((error) => {
         // console.log("subpage 컴포넌트 연결 실패");
@@ -122,7 +111,6 @@ function Home() {
   const renderedComponents = comTypes.map((type, index) => {
     if (type === "리스트") {
       const listItem: ListProps = Items[index];
-      // console.log("subpage list ", listItem.itemInfos);
       return (
         <SubLists
           key={index}
@@ -155,25 +143,10 @@ function Home() {
     return null;
   });
 
-  // const [listTitle, setListTitle] = useState<string[]>([]);
-  // const [itemCount, setItemCount] = useState<number[]>([]);
-  // const [itemIds, setItemIds] = useState<number[]>([]);
-  // const [imageUrls, setImageUrls] = useState<string[]>([]);
-  // const [titles, setTitles] = useState<string[]>([]);
-  // const [startPrices, setStartPrice] = useState<number[]>([]);
-
   return (
     <MainComponent>
       <Fade>
         <div>
-          {/* <Header />
-          <MainBanner />
-          <div className={Style["App"]}>
-            <MainLists />
-            <MainTiles />
-            {/* <MainMoreAbout /> 
-          </div> */}
-
           {categoryData && (
             <div className={Style["subTitleContainer"]}>
               <img
