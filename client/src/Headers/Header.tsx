@@ -15,6 +15,7 @@ import { useCategoryContext } from "./Contexts/CategoryContext";
 import { CategoryNameMenuProps } from "../Interfaces/PropsInterfaces";
 
 import Login from "../Headers/Component/Login";
+import Logo from "../Headers/Component/Logo";
 
 // mobileHeader === 1 모바일
 // mobileHeader === 0 pc
@@ -243,27 +244,7 @@ function Header() {
                 setCookie={setCookie}
                 removeCookie={removeCookie}
               />
-              <div className="logo_container">
-                <img
-                  className="logo_mobile"
-                  src={logoimage}
-                  alt="Amuse Travel Logo"
-                  onClick={navigateToHome}
-                />
-              </div>
-
-              <div className="search-box-mobile">
-                <input
-                  type="text"
-                  placeholder="여행 키워드를 검색해보세요!"
-                  value={searchKeyword}
-                  onChange={handleInputChange}
-                  onKeyDown={handleKeyPress}
-                />
-                <button className="searchBtn" onClick={navigateToSearch}>
-                  <img src={SearchIcon} alt="searchIcon"></img>
-                </button>
-              </div>
+              <Logo />
               <div className="menu">
                 {categories.length <= 2 ? (
                   categories.map((categoryName: string, index: number) => (
@@ -312,26 +293,7 @@ function Header() {
                 setCookie={setCookie}
                 removeCookie={removeCookie}
               />
-              <div className="top">
-                <img
-                  className="logo"
-                  src={logoimage}
-                  alt="Amuse Travel Logo"
-                  onClick={navigateToHome}
-                />
-                <div className="search-box">
-                  <input
-                    type="text"
-                    placeholder="여행 키워드를 검색해보세요!"
-                    value={searchKeyword}
-                    onChange={handleInputChange}
-                    onKeyDown={handleKeyPress}
-                  />
-                  <button className="searchBtn" onClick={navigateToSearch}>
-                    <img src={SearchIcon} alt="searchIcon"></img>
-                  </button>
-                </div>
-              </div>
+              <Logo />
               <div className="menu">
                 {categories.length <= 5 ? (
                   categories.map((categoryName: string, index: number) => (
