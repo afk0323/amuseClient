@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import moment from "moment";
 import MyPageMenu from "../../../MyPages/MyPageMenu";
+import * as S from "./style";
+import * as C from "./constants";
 
 interface LoginProps {
   name: string | undefined;
@@ -51,31 +53,25 @@ function Login({
   };
 
   return (
-    <div className="btnBox">
+    <S.Login>
       {loggedIn ? (
-        <div className="userName">{name || cookies.__usrN__} 님 😊</div>
+        <S.Button>
+          {name || cookies.__usrN__} {C.LOGIN.USER}
+        </S.Button>
       ) : (
         ""
       )}
       {loggedIn ? (
-        <button className="loginBtn" onClick={handleLogout}>
-          로그아웃
-        </button>
+        <S.Button onClick={handleLogout}>{C.LOGIN.LOGOUT}</S.Button>
       ) : (
-        <button className="loginBtn" onClick={navigateToLogIn}>
-          로그인
-        </button>
+        <S.Button onClick={navigateToLogIn}>{C.LOGIN.LOGIN}</S.Button>
       )}
       {loggedIn ? (
-        <div>
-          <MyPageMenu />
-        </div>
+        <MyPageMenu />
       ) : (
-        <button className="signInBtn" onClick={navigateToSignUP}>
-          회원가입
-        </button>
+        <S.Button onClick={navigateToSignUP}>{C.LOGIN.JOIN}</S.Button>
       )}
-    </div>
+    </S.Login>
   );
 }
 
