@@ -3,8 +3,6 @@ import _ from "lodash";
 import "./Header.css";
 import axios from "axios";
 import moment from "moment";
-import SearchIcon from "./search.png";
-import logoimage from "../MainPage/MainImgs/amuse_logo.png";
 import Style from "../App.module.css";
 import { isLoggedIn } from "../atoms";
 import { useCookies } from "react-cookie";
@@ -37,22 +35,12 @@ function Header() {
     "__usrN__",
   ]);
 
-  const navigateToHome = () => {
-    movePage("/");
-  };
-
   const navigateToSubPageComp = (apiKey: number, cName: string) => {
     const apiKeyString: string = apiKey.toString();
     console.log(apiKey, "apiKey");
     if (cName === "home" || cName === "Home") {
       movePage("/");
     } else movePage(`/category/${apiKeyString}`);
-  };
-
-  const navigateToSearch = () => {
-    const encodedKeyword = encodeURIComponent(searchKeyword);
-    movePage(`/search/${encodedKeyword}`);
-    setSearchKeyword("");
   };
 
   const CategoryMenu: React.FC<CategoryNameMenuProps> = ({
@@ -118,18 +106,6 @@ function Header() {
         console.log("해시태그 연결 실패");
       });
   }, []);
-
-  const [searchKeyword, setSearchKeyword] = useState("");
-
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKeyword(event.target.value);
-  };
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
-      navigateToSearch();
-    }
-  };
 
   const [mobileHeader, setMobileHeader] = useState(0);
   const handleResize = () => {

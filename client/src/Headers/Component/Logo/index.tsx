@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import logoimage from "../../../MainPage/MainImgs/amuse_logo.png";
-import SearchIcon from "./search.png";
+import SearchIcon from "./search.svg";
+import * as S from "./style";
+import * as C from "./constants";
 
 function Logo() {
   const movePage = useNavigate();
@@ -28,26 +30,25 @@ function Logo() {
   };
 
   return (
-    <div className="top">
-      <img
-        className="logo"
+    <S.Logo>
+      <S.Image
         src={logoimage}
         alt="Amuse Travel Logo"
         onClick={navigateToHome}
       />
-      <div className="search-box">
-        <input
+      <S.Search>
+        <S.Input
           type="text"
-          placeholder="여행 키워드를 검색해보세요!"
+          placeholder={C.LOGO.SEARCH}
           value={searchKeyword}
           onChange={handleInputChange}
           onKeyDown={handleKeyPress}
         />
-        <button className="searchBtn" onClick={navigateToSearch}>
-          <img src={SearchIcon} alt="searchIcon"></img>
-        </button>
-      </div>
-    </div>
+        <S.Button onClick={navigateToSearch}>
+          <img src={SearchIcon} alt="Search Icon"></img>
+        </S.Button>
+      </S.Search>
+    </S.Logo>
   );
 }
 
