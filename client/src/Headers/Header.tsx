@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import _ from "lodash";
 import "./Header.css";
 import axios from "axios";
 import moment from "moment";
@@ -9,24 +8,17 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { useInfoContext } from "../DetailPage/Contexts/InfoContext";
-import { useCategoryContext } from "./Contexts/CategoryContext";
-import { CategoryNameMenuProps } from "../Interfaces/PropsInterfaces";
-
 import Login from "../Headers/Component/Login";
 import Logo from "../Headers/Component/Logo";
+import Menu from "../Headers/Component/Menu";
 
 // mobileHeader === 1 모바일
 // mobileHeader === 0 pc
 
-interface MoreDropdownProps {
-  // handleClick: () => void;
-  // count: number;
-}
-
 function Header() {
   const movePage = useNavigate();
   const { name, setName } = useInfoContext();
-  const { setCategoriesInfo } = useCategoryContext();
+
   const [loggedIn, setLoggedIn] = useRecoilState(isLoggedIn);
   const [cookies, setCookie, removeCookie] = useCookies([
     "__jwtk__",
@@ -34,79 +26,6 @@ function Header() {
     "__jwtkid__",
     "__usrN__",
   ]);
-
-  const navigateToSubPageComp = (apiKey: number, cName: string) => {
-    const apiKeyString: string = apiKey.toString();
-    console.log(apiKey, "apiKey");
-    if (cName === "home" || cName === "Home") {
-      movePage("/");
-    } else movePage(`/category/${apiKeyString}`);
-  };
-
-  const CategoryMenu: React.FC<CategoryNameMenuProps> = ({
-    categoryName: categoryName,
-    handleClick,
-  }) => (
-    <div
-      className={mobileHeader === 0 ? "menu-item" : "menu-item_mobile"}
-      onClick={handleClick}
-    >
-      {categoryName}
-    </div>
-  );
-
-  const [categories, setCategories] = useState([]);
-  const [categoryIds, setCategoryIds] = useState([]);
-
-  const MoreDropdown: React.FC<MoreDropdownProps> = () => (
-    <div className="dropdown">
-      {mobileHeader === 0 ? (
-        categories.slice(4).map((categoryName: string, index: number) => (
-          <div
-            className="dropdown-item"
-            key={index}
-            onClick={() =>
-              navigateToSubPageComp(categoryIds[index + 4], categoryName)
-            }
-          >
-            {categoryName}
-          </div>
-        ))
-      ) : (
-        <>
-          {categories.slice(2).map((categoryName: string, index: number) => (
-            <div
-              className="dropdown-item"
-              key={index}
-              onClick={() =>
-                navigateToSubPageComp(categoryIds[index + 2], categoryName)
-              }
-            >
-              {categoryName}
-            </div>
-          ))}
-        </>
-      )}
-    </div>
-  );
-
-  useEffect(() => {
-    axios
-      .get(`${process.env.REACT_APP_AMUSE_API}/main/category`)
-      .then((response) => {
-        const categoryAll = response.data.data.categories;
-        const categorySort: any | [] = _.sortBy(categoryAll, "sequence");
-        const categoryNames = categorySort.map((id: any) => id.categoryName);
-        setCategoriesInfo(categorySort);
-        setCategories(categoryNames);
-        const categoryId = categoryAll.map((id: any) => id.categoryId);
-        setCategoryIds(categoryId);
-      })
-      .catch((error) => {
-        console.log("해시태그 연결 실패");
-      });
-  }, []);
-
   const [mobileHeader, setMobileHeader] = useState(0);
   const handleResize = () => {
     const windowWidth = window.innerWidth;
@@ -116,6 +35,7 @@ function Header() {
       setMobileHeader(1);
     }
   };
+
   useEffect(() => {
     handleResize(); // Call initially
     window.addEventListener("resize", handleResize); // Add event listener for window resize
@@ -189,14 +109,12 @@ function Header() {
         },
       })
       .then((response) => {
-        // setUserData(response.data.data);
         let userData = response.data.data;
         setName(response.data.data?.name);
         const expires = moment().add("8", "h").toDate();
         setCookie("__usrN__", response.data.data?.name, { expires });
         if (!userData?.advertisementTrue) {
           setLoggedIn(false);
-          // setManager(false);
           movePage("/LoginAgree");
         }
       })
@@ -221,40 +139,7 @@ function Header() {
                 removeCookie={removeCookie}
               />
               <Logo />
-              <div className="menu">
-                {categories.length <= 2 ? (
-                  categories.map((categoryName: string, index: number) => (
-                    <CategoryMenu
-                      key={index}
-                      categoryName={categoryName}
-                      handleClick={() =>
-                        navigateToSubPageComp(categoryIds[index], categoryName)
-                      }
-                    />
-                  ))
-                ) : (
-                  <>
-                    {categories
-                      .slice(0, 2)
-                      .map((categoryName: string, index: number) => (
-                        <CategoryMenu
-                          key={index}
-                          categoryName={categoryName}
-                          handleClick={() =>
-                            navigateToSubPageComp(
-                              categoryIds[index],
-                              categoryName
-                            )
-                          }
-                        />
-                      ))}
-                    <div className="menu-item_mobile more-dropdown">
-                      더보기 ▼
-                      <MoreDropdown />
-                    </div>
-                  </>
-                )}
-              </div>
+              <Menu />
             </div>
           )}
 
@@ -270,40 +155,7 @@ function Header() {
                 removeCookie={removeCookie}
               />
               <Logo />
-              <div className="menu">
-                {categories.length <= 5 ? (
-                  categories.map((categoryName: string, index: number) => (
-                    <CategoryMenu
-                      key={index}
-                      categoryName={categoryName}
-                      handleClick={() =>
-                        navigateToSubPageComp(categoryIds[index], categoryName)
-                      }
-                    />
-                  ))
-                ) : (
-                  <>
-                    {categories
-                      .slice(0, 5)
-                      .map((categoryName: string, index: number) => (
-                        <CategoryMenu
-                          key={index}
-                          categoryName={categoryName}
-                          handleClick={() =>
-                            navigateToSubPageComp(
-                              categoryIds[index],
-                              categoryName
-                            )
-                          }
-                        />
-                      ))}
-                    <div className="menu-item more-dropdown">
-                      더보기 ▼
-                      <MoreDropdown />
-                    </div>
-                  </>
-                )}
-              </div>
+              <Menu />
             </div>
           )}
         </div>
