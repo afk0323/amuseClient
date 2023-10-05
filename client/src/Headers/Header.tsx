@@ -127,19 +127,19 @@ function Header() {
     <div>
       <div className={Style["App"]}>
         {/* 모바일 버전 */}
-        <div className={`${mobileHeader === 1 ? "mobile-header" : ""}`}>
+        <div>
           {mobileHeader === 1 && (
             <div style={{ paddingTop: "5px", paddingBottom: "10px" }}>
-              <Login
+              {/* <Login
                 name={name}
                 loggedIn={loggedIn}
                 setLoggedIn={setLoggedIn}
                 cookies={cookies}
                 setCookie={setCookie}
                 removeCookie={removeCookie}
-              />
+              /> */}
               <Logo />
-              <Menu />
+              {/* <Menu /> */}
             </div>
           )}
 
