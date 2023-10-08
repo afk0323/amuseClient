@@ -14,7 +14,6 @@ import Menu from "../Headers/Component/Menu";
 
 // mobileHeader === 1 모바일
 // mobileHeader === 0 pc
-
 function Header() {
   const movePage = useNavigate();
   const { name, setName } = useInfoContext();
@@ -29,7 +28,7 @@ function Header() {
   const [mobileHeader, setMobileHeader] = useState(0);
   const handleResize = () => {
     const windowWidth = window.innerWidth;
-    if (windowWidth >= 700) {
+    if (windowWidth >= 768) {
       setMobileHeader(0);
     } else {
       setMobileHeader(1);
