@@ -4,6 +4,8 @@ import Home from "../src/Home";
 import SubPageComp from "./SubPages/SubPageComp";
 import MyPage from "./MyPages/MyPage";
 import Login from "./LogIn/LogIn";
+import FindId from "./LogIn/FindId";
+import FindPw from "./LogIn/FindPw";
 import LoginAgree from "./LogIn/LoginAgree";
 import SignUp from "./SignUp/SignUp";
 import Detail from "./DetailPage/Detail/Detail";
@@ -112,6 +114,8 @@ function App() {
           <Route path="/ChildCare" element={<ChildCare />}></Route>
           <Route path="/SeniorCare" element={<SeniorCare />}></Route> */}
               <Route path="/LogIn" element={<Login />}></Route>
+              <Route path="/LogIn/FindId" element={<FindId />}></Route>
+              <Route path="/LogIn/FindPw" element={<FindPw />}></Route>
               <Route path="/SignUp" element={<SignUp />}></Route>
               <Route path="/MyPage/:category" element={<MyPage />}></Route>
               <Route path="/Review/:id" element={<Review />}></Route>
