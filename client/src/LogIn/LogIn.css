@@ -1,143 +1,113 @@
 .login_body {
-    flex-direction: column;
-    align-items: center;
-    max-width: 530px;
-    border: solid 3px lightgray;
-    border-radius: 6px;
-    margin: 30px auto;
-    padding: 36px;
-  }
-  
-  .amuse_logo {
-    width: 300px;
-    height: 80px;
-  }
-  
-  .amuse_login_title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .amuse_title_bottom {
-    color: #EB1749;
-    margin: 10px 0;
-  }
-  
-  .login_btn {
-    background-color:#e9ecf2;
-    width: 95px;
-    height: 28px;
-    border-radius: 4px;
-    border: none;
-  }
-  
-  .amuse_title_top {
-    margin: 40px 0 0 0;
-  }
-  
-  .signup_link, .password_reset_link {
-    color: #EB1749;
-    margin-left: 15px;
-  }
-  
-  .email_input, .password_input, .user_name_input {
-    width: 380px;
-    height: 42px;
-    border-style: none;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 4px;
-    margin: 8px 0;
-  }
+  flex-direction: column;
+  align-items: center;
+  max-width: 699px;
+  height: 506px;
+  margin: 30px auto;
+}
 
-  .email_input {
-    width: 100%
-  }
-  
-  .input {
-    padding: 6px 20px;
-  }
-  
-  .signup_box, .password_reset_box {
-    display: flex;
-    justify-content: baseline;
-    margin: 3px 0;
-  }
-  
-  .login_function_box {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 25px 0 0 0;
-  }
-  
-  .v_box {
-    display: flex;
-    flex-direction: column;
-    max-width: 450px;
-    padding: 15px;
-    align-items: baseline;
-    margin: auto;
-  }
+.login_title {
+  display: flex;
+  justify-content: center;
+  color: #000;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: normal;
+}
 
-  .OAuth {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    text-align: center;
-    margin: auto;
-    margin-top: 30px;
-  }
+.input {
+  width: 699px;
+  height: 150px;
+  border: solid 1px #DDDDDD;
+  border-radius: 8px;
+}
 
-  .login_google {
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
-    /* 기존 스타일 유지 */
-    background-color: #fff;
-    color: black;
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    text-align: center;
-  }
+.keep_id {
+  margin: 15px;
+  display: flex;
+  align-items: center;
+}
 
-  .login_kakao {
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+.keep_id_check {
+  content: url(./Icons/check_icon.png);
+  width: 20px;
+  margin: 0 10px 0 0;
+}
 
-    background-color: #ffe812;
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    color: black;
-  }
+.keep_id_check:checked {
+  content: url(./Icons/checked_icon.png);
+}
 
-  .login_naver {
-    display: flex;
-    justify-content: center; /* 수평 가운데 정렬 */
-    align-items: center; /* 수직 가운데 정렬 */
+.keep_id_text {
+  color: #111;
+  /* font-size: 12px;
+  font-weight: 500;
+  line-height: normal; */
+}
 
-    background-color: #3EAF0E;
-    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    color: white;
-  }
+.login_btn {
+  width: 699px;
+  height: 51px;
+  border: none;
+  border-radius: 8px;
+  background: #E6003E;
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: normal;
+}
 
-  .login_google, .login_kakao, .login_naver{
-    border-radius: 4px;
-    height: 36px;
-    border: none;
-    padding: 4px;
-    margin: 4px 0;
-    
-    text-decoration: none;
-    font-weight: 550;
-  }
+.login_function_box {
+  display: flex;
+  justify-content: space-between;
+  margin: 25px 0 0 0;
+  color: #353535;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+}
 
-  .naver_logo, .kakao_logo {
-    width: 30px;
-    height: 30px;
-    margin-right: 36px;
-  }
+.no_decoration {
+  text-decoration: none;
+  color: #353535;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.separator::before {
+  content: "";
+  border-left: 1px solid #DDD;
+  height: 20px;
+  margin: 0 14px;
+}
+
+.signup_btn_box .no_decoration {
+  display: flex;
+  align-items: center;
+}
+
+.signup_link {
+  color: #4A87FF;
+  margin-left: 4px;
+}
+
+.v_box {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 30px;
+  align-items: center;
+  color: #797979;
+  font-size: 15px;
+}
+
+.OAuth {
+  display: flex;
+  text-align: center;
+}
+
+.sns_logo {
+  width: 49px;
+  margin-right: 0;
+  margin-left: 10px;
+}

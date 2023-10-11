@@ -1,0 +1,224 @@
+.find_account {
+  .find_account_tab {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: normal;
+
+    ul {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      padding: 0;
+      margin: 19px 0 4px 0;
+    }
+
+    li {
+      width: 376px;
+      color: #E8E8E8;
+      border-bottom: solid 2px #E8E8E8;
+      list-style: none;
+      text-align: center;
+      height: 38px;
+      margin: 0;
+    }
+
+    .selected {
+      width: 376px;
+      color: #000;
+      border-bottom: solid 2px #000;
+    }
+  }
+
+  .reset_pw_body {
+    display: flex;
+    justify-content: center;
+    margin: 30px auto;
+
+    .reset_pw {
+      width: 702px;
+
+      .reset_title {
+        display: flex;
+        justify-content: center;
+        color: #000;
+        font-size: 24px;
+        font-weight: 600;
+        line-height: normal;
+      }
+
+      .reset_pw_box {
+        display: flex;
+        flex-direction: column;
+
+        .input_pw_title {
+          margin: 15px 0;
+          color: #000;
+          font-family: Pretendard;
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+
+        .input_pw {
+          width: 100%;
+          height: 47px;
+          margin-bottom: 16px;
+          border-radius: 8px;
+          border: 1px solid #DDD;
+          background: #FFF;
+        }
+
+        .note_box {
+          height: 82px;
+          border-radius: 8px;
+          border: 1px solid var(--, #F3F3F3);
+          background: #F5F5F5;
+          margin: 15px 0;
+          padding: 14px;
+
+          .note_title {
+            color: #000;
+            font-family: Pretendard;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: normal;
+            margin: 0;
+            padding-bottom: 8px;
+          }
+
+          .note_content {
+            margin: 0;
+            color: #909090;
+            font-family: Pretendard;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 150%;
+          }
+        }
+      }
+    }
+  }
+
+}
+
+
+.find_body {
+  display: flex;
+  justify-content: center;
+
+  .show {
+    display: block;
+  }
+
+  .hide {
+    display: none;
+  }
+
+  .find_form {
+    width: 702px;
+
+    fieldset {
+      padding: 0;
+      border: none;
+    }
+
+    .find_title_box {
+      margin: 15px 0;
+
+      .find_title {
+        color: #000;
+        font-family: Pretendard;
+        font-size: 16px;
+        font-weight: 600;
+        line-height: normal;
+      }
+    }
+
+    .inn_box.show {
+      display: flex;
+      flex-direction: column;
+
+      .flex_box_sub {
+        display: flex;
+        justify-content: space-between;
+
+        .input_name {
+          width: 597px;
+        }
+
+        .input_gender input[type="radio"] {
+          display: none;
+        }
+
+        .input_gender label {
+          display: inline-block;
+          padding: 13px 16.2px;
+          font-size: 16px;
+          cursor: pointer;
+        }
+
+        .input_gender label.first_label {
+          border-radius: 8px 0 0 8px;
+          border: 1px solid #DDD;
+          background: #FFF;
+        }
+
+        .input_gender label.last_label {
+          border-radius: 0 8px 8px 0;
+          border: 1px solid #DDD;
+          background: #FFF;
+        }
+
+        .input_gender input[type="radio"]:checked+label {
+          background-color: #3498db;
+          color: #fff;
+        }
+      }
+
+      .input_text {
+        width: 100%;
+        height: 47px;
+        margin-bottom: 16px;
+        border-radius: 8px;
+        border: 1px solid #DDD;
+        background: #FFF;
+      }
+
+      .auth_box,
+      .birth_box,
+      .sms_box,
+      .email_box {
+        display: flex;
+
+        .inn_btn {
+          height: 25px;
+          border: none;
+          border-radius: 8px;
+          background: #EDEDED;
+          font-size: 12px;
+          font-weight: 600;
+          margin-top: 11px;
+        }
+
+        .name_request_btn {
+          margin-left: -97px;
+        }
+
+        .auth_request_btn {
+          margin-left: -97px;
+        }
+
+        .auth_btn {
+          margin-left: -70px;
+        }
+      }
+
+    }
+
+
+  }
+
+}
